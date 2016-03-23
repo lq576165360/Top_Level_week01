@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <View
+        android:layout_width="match_parent"
+        android:background="#ccc1c1"
+        android:layout_height="5dp"/>
+    <TextView
+        android:layout_margin="10dp"
+        android:text="hhhhhhh"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:id="@+id/strategy_expndablelistview_group_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>
