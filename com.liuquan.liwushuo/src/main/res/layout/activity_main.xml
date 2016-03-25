@@ -8,6 +8,12 @@
         android:id="@+id/main_contain"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+    <View
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="55dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#aaaaaa"/>
     <RadioGroup
         android:id="@+id/main_rg_bottom"
         android:layout_width="match_parent"
