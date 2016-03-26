@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.liuquan.liwushuo.activity.Hot2Activity">
+
+
+
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/hot2_scoroll"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/hot2_iv"
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/abc2" />
+
+            <TextView
+                android:id="@+id/hot2_title_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="创意回复回复看看" />
+
+            <TextView
+                android:id="@+id/hot2_title_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Y17.5"
+                android:textColor="#ff0000" />
+
+            <TextView
+                android:id="@+id/hot2_title_des"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="创意回复回复看看"
+                android:textColor="#aaaaaa"
+                android:textSize="12sp" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:background="#e1d3d3" />
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/hot2_viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="1400dp" />
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+    <RelativeLayout
+        app:layout_anchor="@id/hot2_iv"
+        android:id="@+id/hot2_toolbar"
+        android:layout_width="match_parent"
+        android:gravity="center_vertical"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#00FF0000">
+
+        <ImageView
+            android:id="@+id/hot2_menu_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:clickable="true"
+            android:src="@drawable/ic_action_back" />
+
+        <ImageView
+            android:id="@+id/hot2_menu_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:clickable="true"
+            android:src="@drawable/ic_menu_share" />
+
+    </RelativeLayout>
+
+    <RadioGroup
+
+        android:id="@+id/hot2_rg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        app:layout_anchor="@id/hot2_viewpager">
+
+        <RadioButton
+            android:id="@+id/hot2_rb_detail"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#ffffff"
+            android:button="@null"
+            android:gravity="center"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:text="图文介绍" />
+
+        <RadioButton
+            android:id="@+id/hot2_rb_comment"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#ffffff"
+            android:button="@null"
+            android:gravity="center"
+            android:text="评论(7)" />
+
+    </RadioGroup>
+
+
+</android.support.design.widget.CoordinatorLayout>

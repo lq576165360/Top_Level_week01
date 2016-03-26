@@ -1,6 +1,7 @@
 package com.liuquan.liwushuo.fragment.viewpager.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.liuquan.liwushuo.R;
+import com.liuquan.liwushuo.activity.Gift2Activity;
 import com.liuquan.liwushuo.bean.GiftInfo;
 import com.liuquan.liwushuo.fragment.BaseFragment;
 import com.liuquan.liwushuo.http.IOkCallback;
@@ -248,15 +250,16 @@ public class GiftFragment extends BaseFragment {
 
         @Override
         public View getChildView(int i, int i1, boolean b, View view, ViewGroup viewGroup) {
+            List<GiftInfo.DataEntity.CategoriesEntity.SubcategoriesEntity> subcategories = categories.get(i).getSubcategories();
             ChildViewHoudle childViewHoudle = null;
             if (view != null) {
                 childViewHoudle = (ChildViewHoudle) view.getTag();
             } else {
                 view = LayoutInflater.from(mContext).inflate(R.layout.item_strategy_exlistview_child, viewGroup, false);
-                childViewHoudle = new ChildViewHoudle(view);
+                childViewHoudle = new ChildViewHoudle(view,subcategories);
                 view.setTag(childViewHoudle);
             }
-            List<GiftInfo.DataEntity.CategoriesEntity.SubcategoriesEntity> subcategories = categories.get(i).getSubcategories();
+
             //gruidViewAdapter.notifyDataSetChanged();
             //创建适配
             MyGruidViewAdapter gruidViewAdapter = adapterMap.get(subcategories);
@@ -273,8 +276,20 @@ public class GiftFragment extends BaseFragment {
             @Bind(R.id.strategy_expndablelistview_child_gruidview)
             MyGruidView myGruidView;
 
-            public ChildViewHoudle(View view) {
+            public ChildViewHoudle(View view, final List<GiftInfo.DataEntity.CategoriesEntity.SubcategoriesEntity> subcategories) {
                 ButterKnife.bind(this, view);
+                myGruidView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        int id = subcategories.get(i).getId();
+                        String name = subcategories.get(i).getName();
+                        LogTool.LOG_D("---------gruidView---------" + id);
+                        Intent intent = new Intent(mContext, Gift2Activity.class);
+                        intent.putExtra("id", id);
+                        intent.putExtra("name", name);
+                        startActivity(intent);
+                    }
+                });
             }
         }
 
@@ -320,6 +335,7 @@ public class GiftFragment extends BaseFragment {
             }
             gruidViewHoulder.textView.setTextSize(13);
             gruidViewHoulder.textView.setText(subcategories.get(i).getName());
+            gruidViewHoulder.imageView.setImageResource(R.drawable.defualt);
             Picasso.with(mContext).load(subcategories.get(i).getIcon_url()).into(gruidViewHoulder.imageView);
 
             return view;

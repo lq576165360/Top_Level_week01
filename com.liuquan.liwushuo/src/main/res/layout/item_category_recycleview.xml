@@ -8,7 +8,8 @@
         android:src="@drawable/abc2"
         android:layout_marginLeft="10dp"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="70dp"
         android:scaleType="fitXY"
+        android:layout_marginBottom="10dp"
         app:riv_corner_radius="8dip"/>
 </LinearLayout>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.liuquan.liwushuo.activity.Gift2Activity">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/gift2_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#ff0000">
+
+        <ImageView
+            android:id="@+id/gift2_menu_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:src="@drawable/ic_action_back" />
+
+        <TextView
+            android:id="@+id/gift2_menu_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="旧舍新颜"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
+        <ImageView
+            android:id="@+id/gift2_menu_sort"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:clickable="true"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/ic_menu_sort" />
+    </android.support.v7.widget.Toolbar>
+    <com.handmark.pulltorefresh.library.PullToRefreshGridView
+        android:layout_below="@+id/gift2_toolbar"
+        android:id="@+id/gift2_gruidview"
+        android:verticalSpacing="5dp"
+        android:horizontalSpacing="5dp"
+        android:numColumns="2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</RelativeLayout>

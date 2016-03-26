@@ -1,12 +1,14 @@
 package com.liuquan.liwushuo.fragment.viewpager.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
@@ -14,11 +16,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.liuquan.liwushuo.R;
+import com.liuquan.liwushuo.activity.BannerActivity;
+import com.liuquan.liwushuo.activity.Gift2Activity;
 import com.liuquan.liwushuo.bean.GroupInfo;
 import com.liuquan.liwushuo.bean.SpecialInfo;
 import com.liuquan.liwushuo.fragment.BaseFragment;
 import com.liuquan.liwushuo.http.IOkCallback;
 import com.liuquan.liwushuo.http.OkHttpTools;
+import com.liuquan.liwushuo.tools.LogTool;
 import com.liuquan.liwushuo.ui.MyGruidView;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
@@ -92,6 +97,7 @@ public class StrategyFragment extends BaseFragment {
         setUpExpandlistView();
         //设置监听
         initListenner();
+        myExListViewAdapter.notifyDataSetChanged();
         return view;
     }
 
@@ -195,9 +201,21 @@ public class StrategyFragment extends BaseFragment {
             @Bind(R.id.hcategory_recy_item_iv)
             ImageView iconImageView;
 
-            public ViewHolder(View itemView) {
+            public ViewHolder(final View itemView) {
                 super(itemView);
                 ButterKnife.bind(this, itemView);
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        //Toast.makeText(mContext, "位置" + getPosition(), Toast.LENGTH_SHORT).show();
+                        int id = collections.get(getPosition()).getId();
+                        LogTool.LOG_D("-------id---"+id);
+                        Intent intent = new Intent(mContext, BannerActivity.class);
+                        intent.putExtra("id",id);
+                        LogTool.LOG_D("-----------target_id-----" + id);
+                        startActivity(intent);
+                    }
+                });
             }
         }
 
@@ -269,15 +287,16 @@ public class StrategyFragment extends BaseFragment {
 
         @Override
         public View getChildView(int i, int i1, boolean b, View view, ViewGroup viewGroup) {
+            List<GroupInfo.DataEntity.ChannelGroupsEntity.ChannelsEntity> channels = channel_groups.get(i).getChannels();
             ChildViewHoudle childViewHoudle = null;
             if (view != null) {
                 childViewHoudle = (ChildViewHoudle) view.getTag();
             } else {
                 view = LayoutInflater.from(mContext).inflate(R.layout.item_strategy_exlistview_child, viewGroup, false);
-                childViewHoudle = new ChildViewHoudle(view);
+                childViewHoudle = new ChildViewHoudle(view,channels);
                 view.setTag(childViewHoudle);
             }
-            List<GroupInfo.DataEntity.ChannelGroupsEntity.ChannelsEntity> channels = channel_groups.get(i).getChannels();
+
             //gruidViewAdapter.notifyDataSetChanged();
             //创建适配
             MyGruidViewAdapter gruidViewAdapter = adapterMap.get(channels);
@@ -293,9 +312,22 @@ public class StrategyFragment extends BaseFragment {
             @Bind(R.id.strategy_expndablelistview_child_gruidview)
             MyGruidView myGruidView;
 
-            public ChildViewHoudle(View view) {
+            public ChildViewHoudle(View view,  final List<GroupInfo.DataEntity.ChannelGroupsEntity.ChannelsEntity> channels ) {
                 ButterKnife.bind(this, view);
+                myGruidView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        int id = channels.get(i).getId();
+                        String name = channels.get(i).getName();
+                        LogTool.LOG_D("---------gruidView---------" + id);
+                        Intent intent = new Intent(mContext, Gift2Activity.class);
+                        intent.putExtra("id",id);
+                        intent.putExtra("name",name);
+                        startActivity(intent);
+                    }
+                });
             }
+
         }
 
         @Override
@@ -338,6 +370,7 @@ public class StrategyFragment extends BaseFragment {
                 view.setTag(gruidViewHoulder);
             }
             gruidViewHoulder.textView.setText(channels.get(i).getName());
+            gruidViewHoulder.imageView.setImageResource(R.drawable.defualt);
             Picasso.with(mContext).load(channels.get(i).getIcon_url()).into(gruidViewHoulder.imageView);
             return view;
         }
@@ -351,6 +384,7 @@ public class StrategyFragment extends BaseFragment {
 
         public GruidViewHoulder(View view) {
             ButterKnife.bind(this, view);
+
         }
     }
 }
