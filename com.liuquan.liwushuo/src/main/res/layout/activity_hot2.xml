@@ -111,6 +111,7 @@
             android:paddingTop="10dp"
             android:text="图文介绍" />
 
+
         <RadioButton
             android:id="@+id/hot2_rb_comment"
             android:layout_width="0dp"

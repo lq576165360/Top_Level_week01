@@ -8,6 +8,7 @@
 
 
     <TextView
+        android:clickable="true"
         android:id="@+id/gift_fragment_toptv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

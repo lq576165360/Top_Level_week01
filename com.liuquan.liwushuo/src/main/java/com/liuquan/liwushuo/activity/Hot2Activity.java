@@ -4,12 +4,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.liuquan.liwushuo.R;
 import com.liuquan.liwushuo.bean.Hot2Info;
 import com.liuquan.liwushuo.http.IOkCallback;
 import com.liuquan.liwushuo.http.OkHttpTools;
+import com.liuquan.liwushuo.tools.LogTool;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -31,7 +34,22 @@ public class Hot2Activity extends AppCompatActivity {
        // setSupportActionBar(mToolBar);
         //初始化数据
         downLoadData();
+        mNestedScrollView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                float rawY = event.getRawY();
+                LogTool.LOG_D("--------rawY-------" + rawY);
+                float y = event.getY();
+                LogTool.LOG_D("--------y-------" + y);
+                return false;
+            }
+        });
+        mNestedScrollView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
 
+            }
+        });
     }
 
     private void downLoadData() {

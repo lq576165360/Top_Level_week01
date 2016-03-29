@@ -57,7 +57,8 @@
         </activity>
         <activity android:name=".activity.Hot2Activity" />
         <activity android:name=".activity.Category2Activity" />
-        <activity android:name=".activity.Gift2Activity"></activity>
+        <activity android:name=".activity.Gift2Activity" />
+        <activity android:name=".activity.SearchActivity" android:windowSoftInputMode="adjustPan" />
     </application>
 
 </manifest>
