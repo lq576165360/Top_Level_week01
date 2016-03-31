@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.liuquan.liwushuo.R;
 import com.liuquan.liwushuo.activity.Gift2Activity;
+import com.liuquan.liwushuo.activity.SelecteGiftActivity;
 import com.liuquan.liwushuo.bean.GiftInfo;
 import com.liuquan.liwushuo.fragment.BaseFragment;
 import com.liuquan.liwushuo.http.IOkCallback;
@@ -121,8 +122,16 @@ public class GiftFragment extends BaseFragment {
 
             @Override
             public void onScroll(AbsListView absListView, int i, int i1, int i2) {
-                int num = i==0?0:i/2;
-                LogTool.LOG_D("-------------------"+num);
+                index = i == 0 ? 0 : i / 2;
+                LogTool.LOG_D("-------------------" + index);
+                listViewAdapter.notifyDataSetChanged();
+            }
+        });
+        mTopTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, SelecteGiftActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -383,7 +392,7 @@ public class GiftFragment extends BaseFragment {
             }
             listViewItemHoulder.cateTextView.setText(categories.get(i).getName());
             listViewItemHoulder.cateTextView.setSelected(false);
-            view.setBackgroundColor(Color.GRAY);
+            view.setBackgroundColor(Color.parseColor("#eae7e7"));
             //listViewItemHoulder.cateTextView.setBackgroundColor(Color.GRAY);
             listViewItemHoulder.lineImageView.setSelected(false);
             if (index == i) {

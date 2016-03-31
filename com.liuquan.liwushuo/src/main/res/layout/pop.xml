@@ -19,10 +19,10 @@
         <ImageView
             android:clickable="true"
             android:id="@+id/pop_imageview"
-            android:layout_width="10dp"
-            android:layout_height="10dp"
+            android:layout_width="20dp"
+            android:scaleType="center"
+            android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
-            android:layout_marginRight="10dp"
             android:src="@drawable/arrow_index_up" />
     </LinearLayout>
 

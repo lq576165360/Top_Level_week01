@@ -55,9 +55,9 @@
             <ImageView
                 android:id="@+id/main_fragment_pop_iv"
                 android:layout_width="20dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:scaleType="center"
                 android:layout_gravity="center"
-                android:layout_marginRight="10dp"
                 android:clickable="true"
                 android:src="@drawable/arrow_index_down" />
         </LinearLayout>

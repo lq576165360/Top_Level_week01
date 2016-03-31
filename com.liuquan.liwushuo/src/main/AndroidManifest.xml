@@ -12,15 +12,22 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <!-- 使用相机权限 -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <!-- 闪光灯权限 -->
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <!-- 震动权限 -->
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.SplashActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,6 +36,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".BaseActivity" />
+        <activity android:name=".MainActivity" />
         <activity
             android:name=".activity.DetailActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
@@ -58,7 +66,12 @@
         <activity android:name=".activity.Hot2Activity" />
         <activity android:name=".activity.Category2Activity" />
         <activity android:name=".activity.Gift2Activity" />
-        <activity android:name=".activity.SearchActivity" android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".activity.SearchActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name="com.example.yangjw.zbardemo.zar.CaptureActivity" />
+        <activity android:name=".activity.SelecteGiftActivity" />
+        <activity android:name=".activity.LoginActivity"></activity>
     </application>
 
 </manifest>
