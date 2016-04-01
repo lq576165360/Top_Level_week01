@@ -17,6 +17,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
 }
 
 dependencies {
@@ -48,4 +53,5 @@ dependencies {
     compile files('libs/ShareSDK-Wechat-Moments-2.7.0.jar')
     compile 'com.android.support:design:23.1.1'
     compile files('libs/Native_Libs2.jar')
+    compile files('libs/jpush-android-2.1.0.jar')
 }

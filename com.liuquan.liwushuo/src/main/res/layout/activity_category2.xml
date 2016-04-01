@@ -11,7 +11,7 @@
         android:background="#ff0000">
 
         <ImageView
-            android:id="@+id/category2_menu_back"
+            android:id="@+id/category2_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"

@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 import com.liuquan.liwushuo.R;
 import com.liuquan.liwushuo.activity.BannerActivity;
-import com.liuquan.liwushuo.activity.Gift2Activity;
+import com.liuquan.liwushuo.activity.Category2Activity;
 import com.liuquan.liwushuo.bean.GroupInfo;
 import com.liuquan.liwushuo.bean.SpecialInfo;
 import com.liuquan.liwushuo.fragment.BaseFragment;
@@ -311,7 +311,6 @@ public class StrategyFragment extends BaseFragment {
         class ChildViewHoudle {
             @Bind(R.id.strategy_expndablelistview_child_gruidview)
             MyGruidView myGruidView;
-
             public ChildViewHoudle(View view,  final List<GroupInfo.DataEntity.ChannelGroupsEntity.ChannelsEntity> channels ) {
                 ButterKnife.bind(this, view);
                 myGruidView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -320,7 +319,7 @@ public class StrategyFragment extends BaseFragment {
                         int id = channels.get(i).getId();
                         String name = channels.get(i).getName();
                         LogTool.LOG_D("---------gruidView---------" + id);
-                        Intent intent = new Intent(mContext, Gift2Activity.class);
+                        Intent intent = new Intent(mContext, Category2Activity.class);
                         intent.putExtra("id",id);
                         intent.putExtra("name",name);
                         startActivity(intent);

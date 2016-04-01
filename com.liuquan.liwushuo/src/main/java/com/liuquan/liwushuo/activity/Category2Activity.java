@@ -11,7 +11,6 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,12 +32,12 @@ import butterknife.ButterKnife;
 public class Category2Activity extends AppCompatActivity {
     @Bind(R.id.category2_listview)
     PullToRefreshListView mListView;
-    @Bind(R.id.category2_menu_back)
-    ImageView mImageView;
-    @Bind(R.id.category2_menu_sort)
-    ImageView mShareImageView;
+    @Bind(R.id.category2_back)
+    ImageView backImageView;
     @Bind(R.id.category2_menu_title)
     TextView menuTextView;
+    @Bind(R.id.category2_menu_sort)
+    ImageView sortImageView;
     private List<ProductInfo.DataEntity.ItemsEntity> items= new ArrayList<>();
     private Context mcontext;
     private MyListViewAdapter myAdapter;
@@ -62,6 +61,7 @@ public class Category2Activity extends AppCompatActivity {
         setUpView();
         //设置监听
         setUpListenner();
+        sortImageView.setVisibility(View.GONE);
     }
     private void setUpListenner() {
         mListView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
@@ -81,7 +81,7 @@ public class Category2Activity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 LogTool.LOG_D("-----------位置--------" + i);
-                int i1 = i-1;
+                int i1 = i - 1;
                 String title = items.get(i1).getTitle();
                 String cover_image_url = items.get(i1).getCover_image_url();
                 String content_url = items.get(i1).getContent_url();
@@ -93,19 +93,19 @@ public class Category2Activity extends AppCompatActivity {
             }
         });
 
-        mImageView.setOnClickListener(new View.OnClickListener() {
+        backImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
             }
         });
-        mShareImageView.setOnClickListener(new View.OnClickListener() {
+        sortImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PopupWindow popupWindow = new PopupWindow(mcontext);
-
+            //TODO
             }
         });
+
     }
 
     private void setUpView() {

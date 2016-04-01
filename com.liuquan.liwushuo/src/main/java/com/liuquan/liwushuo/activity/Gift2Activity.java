@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -33,9 +34,9 @@ public class Gift2Activity extends AppCompatActivity {
     @Bind(R.id.gift2_gruidview)
     PullToRefreshGridView mGruidView;
     @Bind(R.id.gift2_menu_back)
-    ImageView mImageView;
+    ImageView backImageView;
     @Bind(R.id.gift2_menu_sort)
-    ImageView mShareImageView;
+    ImageView sortImageView;
     @Bind(R.id.gift2_menu_title)
     TextView menuTextView;
     private int id;
@@ -71,11 +72,25 @@ public class Gift2Activity extends AppCompatActivity {
 
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<GridView> refreshView) {
-                offset+=20;
+                offset += 20;
                 getGift2InfoData();
                 gruidViewAdapter.notifyDataSetChanged();
 //                mGruidView.onRefreshComplete();
 
+            }
+        });
+        mGruidView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(mcontext, Hot2Activity.class);
+                intent.putExtra("id", items.get(position).getId());
+                startActivity(intent);
+            }
+        });
+        backImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }
