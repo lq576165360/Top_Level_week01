@@ -106,4 +106,9 @@ public class MainActivity extends BaseActivity {
         lastIndex = index;
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //fragmentList.clear();
+    }
 }

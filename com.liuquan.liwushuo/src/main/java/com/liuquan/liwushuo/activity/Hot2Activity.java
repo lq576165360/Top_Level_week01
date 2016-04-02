@@ -114,11 +114,11 @@ public class Hot2Activity extends AppCompatActivity implements View.OnClickListe
         mNestedScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
             public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-                if (scrollY > 80) {
+                if (scrollY > 40) {
                     toolbar.setBackgroundColor(Color.RED);
                     toolbar.setAlpha(scrollY / 500f);
                 } else {
-//                   toolbar.setBackgroundColor(Color.parseColor("#00ffffff"));
+                    toolbar.setAlpha(1);
                     toolbar.setBackgroundResource(0);
                 }
             }

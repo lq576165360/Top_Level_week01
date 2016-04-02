@@ -55,6 +55,7 @@ public class GiftFragment extends BaseFragment {
             = new HashMap<>();
     private MyExpenAdapter myExListViewAdapter;
     private int index = -1;
+    private int lastIndex;
 
     public GiftFragment() {
         // Required empty public constructor
@@ -122,9 +123,15 @@ public class GiftFragment extends BaseFragment {
 
             @Override
             public void onScroll(AbsListView absListView, int i, int i1, int i2) {
-                index = i == 0 ? 0 : i / 2;
+                lastIndex = i == 0 ? 0 : i / 2;
                 LogTool.LOG_D("-------------------" + index);
-                listViewAdapter.notifyDataSetChanged();
+                if (index != lastIndex) {
+                    listViewAdapter.notifyDataSetChanged();
+                    mListView.setSelection(index);
+
+                }
+                index = lastIndex;
+
             }
         });
         mTopTextView.setOnClickListener(new View.OnClickListener() {
@@ -258,14 +265,14 @@ public class GiftFragment extends BaseFragment {
         }
 
         @Override
-        public View getChildView(int i, int i1, boolean b, View view, ViewGroup viewGroup) {
-            List<GiftInfo.DataEntity.CategoriesEntity.SubcategoriesEntity> subcategories = categories.get(i).getSubcategories();
+        public View getChildView(final int i, int i1, boolean b, View view, ViewGroup viewGroup) {
+            final List<GiftInfo.DataEntity.CategoriesEntity.SubcategoriesEntity> subcategories = categories.get(i).getSubcategories();
             ChildViewHoudle childViewHoudle = null;
             if (view != null) {
                 childViewHoudle = (ChildViewHoudle) view.getTag();
             } else {
                 view = LayoutInflater.from(mContext).inflate(R.layout.item_strategy_exlistview_child, viewGroup, false);
-                childViewHoudle = new ChildViewHoudle(view,subcategories);
+                childViewHoudle = new ChildViewHoudle(view);
                 view.setTag(childViewHoudle);
             }
 
@@ -278,6 +285,20 @@ public class GiftFragment extends BaseFragment {
             }
             childViewHoudle.myGruidView.setNumColumns(3);
             childViewHoudle.myGruidView.setAdapter(gruidViewAdapter);
+
+            childViewHoudle.myGruidView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    int id1 = subcategories.get(position).getId();
+                    String name = subcategories.get(position).getName();
+                    LogTool.LOG_D("---------gruidView---------" + id1);
+                    LogTool.LOG_D("---------long---------" + id);
+                    Intent intent = new Intent(mContext, Gift2Activity.class);
+                    intent.putExtra("id", id1);
+                    intent.putExtra("name", name);
+                    startActivity(intent);
+                }
+            });
             return view;
         }
 
@@ -285,20 +306,8 @@ public class GiftFragment extends BaseFragment {
             @Bind(R.id.strategy_expndablelistview_child_gruidview)
             MyGruidView myGruidView;
 
-            public ChildViewHoudle(View view, final List<GiftInfo.DataEntity.CategoriesEntity.SubcategoriesEntity> subcategories) {
+            public ChildViewHoudle(View view) {
                 ButterKnife.bind(this, view);
-                myGruidView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        int id = subcategories.get(i).getId();
-                        String name = subcategories.get(i).getName();
-                        LogTool.LOG_D("---------gruidView---------" + id);
-                        Intent intent = new Intent(mContext, Gift2Activity.class);
-                        intent.putExtra("id", id);
-                        intent.putExtra("name", name);
-                        startActivity(intent);
-                    }
-                });
             }
         }
 
@@ -383,6 +392,7 @@ public class GiftFragment extends BaseFragment {
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
             ListViewItemHoulder listViewItemHoulder = null;
+            LogTool.LOG_D("---------------------适配器刷新--------------------------------");
             if (view == null) {
                 view = LayoutInflater.from(mContext).inflate(R.layout.item_gift_listview, null);
                 listViewItemHoulder = new ListViewItemHoulder(view);

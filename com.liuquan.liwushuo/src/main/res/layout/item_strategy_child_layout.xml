@@ -7,8 +7,8 @@
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/strategy_expndablelistview_child_gruidview_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_centerInParent="true"
             android:scaleType="fitCenter"
             android:src="@drawable/abc2"

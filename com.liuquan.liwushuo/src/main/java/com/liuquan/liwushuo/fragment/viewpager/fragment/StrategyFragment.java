@@ -55,8 +55,9 @@ public class StrategyFragment extends BaseFragment {
     private MyAdapter recycleAdapter;
     private List<GroupInfo.DataEntity.ChannelGroupsEntity> channel_groups;
     private MyExListViewAdapter myExListViewAdapter;
-    private Map<List<GroupInfo.DataEntity.ChannelGroupsEntity.ChannelsEntity>,MyGruidViewAdapter> adapterMap
+    private Map<List<GroupInfo.DataEntity.ChannelGroupsEntity.ChannelsEntity>, MyGruidViewAdapter> adapterMap
             = new HashMap<>();
+
     public StrategyFragment() {
         // Required empty public constructor
     }
@@ -124,7 +125,9 @@ public class StrategyFragment extends BaseFragment {
         getHaerdViewData();
 
     }
-
+    /**
+     * 获得头部数据
+     */
     private void getHaerdViewData() {
         OkHttpTools.okGet(specislUrl, SpecialInfo.class, new IOkCallback<SpecialInfo>() {
             @Override
@@ -134,7 +137,9 @@ public class StrategyFragment extends BaseFragment {
             }
         });
     }
-
+    /**
+     * 获得ExpandListView数据
+     */
     private void getExpendListViewData() {
         OkHttpTools.okGet(allUrl, GroupInfo.class, new IOkCallback<GroupInfo>() {
             @Override
@@ -149,6 +154,9 @@ public class StrategyFragment extends BaseFragment {
         });
     }
 
+    /**
+     * 设置头部视图：专题RecycleView
+     */
     private void setUpHeardView() {
         view = LayoutInflater.from(mContext).inflate(R.layout.strategy_lv_heard, null);
         mRecycleView = (RecyclerView) view.findViewById(R.id.category_recycleview_zhuanti);
@@ -176,6 +184,9 @@ public class StrategyFragment extends BaseFragment {
         mListener = null;
     }
 
+    /**
+     * RecycleView适配器
+     */
     class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
 
@@ -209,9 +220,9 @@ public class StrategyFragment extends BaseFragment {
                     public void onClick(View view) {
                         //Toast.makeText(mContext, "位置" + getPosition(), Toast.LENGTH_SHORT).show();
                         int id = collections.get(getPosition()).getId();
-                        LogTool.LOG_D("-------id---"+id);
+                        LogTool.LOG_D("-------id---" + id);
                         Intent intent = new Intent(mContext, BannerActivity.class);
-                        intent.putExtra("id",id);
+                        intent.putExtra("id", id);
                         LogTool.LOG_D("-----------target_id-----" + id);
                         startActivity(intent);
                     }
@@ -287,13 +298,13 @@ public class StrategyFragment extends BaseFragment {
 
         @Override
         public View getChildView(int i, int i1, boolean b, View view, ViewGroup viewGroup) {
-            List<GroupInfo.DataEntity.ChannelGroupsEntity.ChannelsEntity> channels = channel_groups.get(i).getChannels();
+            final List<GroupInfo.DataEntity.ChannelGroupsEntity.ChannelsEntity> channels = channel_groups.get(i).getChannels();
             ChildViewHoudle childViewHoudle = null;
             if (view != null) {
                 childViewHoudle = (ChildViewHoudle) view.getTag();
             } else {
                 view = LayoutInflater.from(mContext).inflate(R.layout.item_strategy_exlistview_child, viewGroup, false);
-                childViewHoudle = new ChildViewHoudle(view,channels);
+                childViewHoudle = new ChildViewHoudle(view);
                 view.setTag(childViewHoudle);
             }
 
@@ -302,29 +313,36 @@ public class StrategyFragment extends BaseFragment {
             MyGruidViewAdapter gruidViewAdapter = adapterMap.get(channels);
             if (gruidViewAdapter == null) {
                 gruidViewAdapter = new MyGruidViewAdapter(channels);
-                adapterMap.put(channels,gruidViewAdapter);
+                adapterMap.put(channels, gruidViewAdapter);
             }
             childViewHoudle.myGruidView.setAdapter(gruidViewAdapter);
+/**
+ * 为gruideView设置监听  注意：这个监听如果写在houdler类里面会存在item复用问题
+ *                             如第一个item回收最后给第第四个item复用，在这里给第四个item的图片和标题
+ *                             赋值了，显示无偏差，但是仅仅只是图片和标题无偏差，实质里层数据还是第一个
+ *                             item的数据
+ */
+            childViewHoudle.myGruidView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    int id = channels.get(i).getId();
+                    String name = channels.get(i).getName();
+                    LogTool.LOG_D("---------gruidView---------" + id);
+                    Intent intent = new Intent(mContext, Category2Activity.class);
+                    intent.putExtra("id", id);
+                    intent.putExtra("name", name);
+                    startActivity(intent);
+                }
+            });
             return view;
         }
 
         class ChildViewHoudle {
             @Bind(R.id.strategy_expndablelistview_child_gruidview)
             MyGruidView myGruidView;
-            public ChildViewHoudle(View view,  final List<GroupInfo.DataEntity.ChannelGroupsEntity.ChannelsEntity> channels ) {
+
+            public ChildViewHoudle(View view) {
                 ButterKnife.bind(this, view);
-                myGruidView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        int id = channels.get(i).getId();
-                        String name = channels.get(i).getName();
-                        LogTool.LOG_D("---------gruidView---------" + id);
-                        Intent intent = new Intent(mContext, Category2Activity.class);
-                        intent.putExtra("id",id);
-                        intent.putExtra("name",name);
-                        startActivity(intent);
-                    }
-                });
             }
 
         }

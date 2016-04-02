@@ -22,10 +22,13 @@ android {
             jniLibs.srcDirs = ['libs']
         }
     }
+
 }
+
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
+
     testCompile 'junit:junit:4.12'
     compile project(':library')
     compile 'com.android.support:appcompat-v7:23.1.1'
@@ -54,4 +57,8 @@ dependencies {
     compile 'com.android.support:design:23.1.1'
     compile files('libs/Native_Libs2.jar')
     compile files('libs/jpush-android-2.1.0.jar')
+    compile files('libs/MobCommons-2016.0303.1229.jar')
+    compile files('libs/MobTools-2016.0303.1229.jar')
+
+
 }

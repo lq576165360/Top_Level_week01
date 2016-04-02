@@ -64,7 +64,7 @@ public class Category2Activity extends AppCompatActivity {
         sortImageView.setVisibility(View.GONE);
     }
     private void setUpListenner() {
-        mListView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+        mListView.setMode(PullToRefreshBase.Mode.PULL_FROM_END);
         mListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {

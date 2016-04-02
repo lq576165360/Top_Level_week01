@@ -196,7 +196,7 @@ public class MainFragment extends BaseFragment implements View.OnClickListener {
                     if (popupWindow != null && popupWindow.isShowing()) {
                         popupWindow.dismiss();
                         popupWindow = null;
-                        relativeLayout.setVisibility(View.VISIBLE);
+                       relativeLayout.setVisibility(View.VISIBLE);
                         viewPager.setCurrentItem(finalI);
                     }
                 }
@@ -205,7 +205,7 @@ public class MainFragment extends BaseFragment implements View.OnClickListener {
         // 创建PopupWindow实例,200,LayoutParams.MATCH_PARENT分别是宽度和高度
         popupWindow = new PopupWindow(popupWindow_view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
         // 设置动画效果
-        // popupWindow.setAnimationStyle(R.style.AnimationFade);
+  //       popupWindow.setAnimationStyle(R.style.AnimationFade);
         // 点击其他地方消失
 //        popupWindow_view.setOnTouchListener(new View.OnTouchListener() {
 //            @Override
